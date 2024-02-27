@@ -1,0 +1,119 @@
+<div translate="no" class="mainDiv">
+  <!-- <div class="tip"><br /><br /></div> -->
+  <br /><br /><br />
+  <div class="cont">
+    <form id="signInForm" #singIn (ngSubmit)="SignInSubmit(singIn)">
+      <div class="form sign-in">
+        <h2 class="setC">Sign In to Mark</h2>
+        <label>
+          <span class="setCB">Email</span>
+          <input type="email" name="email" [(ngModel)]="email" #ngModel />
+          <div>
+            <ng-container *ngIf="checkEmailEntered">
+              <small class="text-danger font-weight-bold setF"
+                >Please Enter Email
+              </small>
+            </ng-container>
+          </div></label
+        >
+        <label>
+          <span class="setCB">Password</span>
+          <input
+            type="password"
+            name="password"
+            [(ngModel)]="password"
+            #ngModel
+          />
+          <div>
+            <ng-container *ngIf="checkPasswordEntered">
+              <small class="text-danger font-weight-bold setF"
+                >Please Enter Password
+              </small>
+            </ng-container>
+          </div>
+        </label>
+        <p class="forgot-pass setC">
+          <a [routerLink]="" (click)="forgotPassword()">Forgot password?</a>
+        </p>
+
+        <button type="submit" class="submit">Sign In</button>
+        <!-- <button type="button" class="fb-btn">
+          Connect with <span>facebook</span>
+        </button> -->
+      </div>
+    </form>
+
+    <div class="sub-cont">
+      <div class="img">
+        <div class="img__text m--up">
+          <h2>New here?</h2>
+          <p>A New World is rising. Let’s Discover it!</p>
+        </div>
+        <div class="img__text m--in">
+          <h2>One of us?</h2>
+          <p>If you already has an account, just sign in. We've missed you!</p>
+        </div>
+        <button type="button" class="img__btn" (click)="rend($event)">
+          <span class="m--up">Sign Up</span>
+          <span class="m--in">Sign In</span>
+        </button>
+      </div>
+      <form id="signupForm" #singUp (ngSubmit)="registerSubmit(singUp)">
+        <div class="mt-3">
+          <h2 class="setC">Join Mark</h2>
+          <label>
+            <span class="setCB">Email</span>
+            <input type="email" name="remail" [(ngModel)]="Remail" #ngModel />
+            <div>
+              <ng-container *ngIf="checkRemail">
+                <small class="text-danger font-weight-bold setF"
+                  >Please Enter Email
+                </small>
+              </ng-container>
+            </div>
+          </label>
+          <label>
+            <span class="setCB">Name</span>
+            <input type="text" name="rname" [(ngModel)]="Rname" #ngModel />
+            <div>
+              <ng-container *ngIf="checkRname">
+                <small class="text-danger font-weight-bold setF"
+                  >Please Enter Name
+                </small>
+              </ng-container>
+            </div>
+          </label>
+
+          <label>
+            <span class="setCB">Password</span>
+            <input
+              type="password"
+              name="rpassword"
+              [(ngModel)]="Rpass"
+              #ngModel
+            />
+            <div>
+              <ng-container *ngIf="checkRpassword">
+                <small class="text-danger font-weight-bold setF"
+                  >Please Enter Email
+                </small>
+              </ng-container>
+            </div>
+          </label>
+          <button type="submit" class="submit">Sign Up</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <br /><br /><br />
+</div>
+<!-- <div id="pwdModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+
+</div> -->
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#c5c4d2"
+  type="ball-scale-ripple"
+  [fullScreen]="true"
+  ><p style="color: white"></p></ngx-spinner>

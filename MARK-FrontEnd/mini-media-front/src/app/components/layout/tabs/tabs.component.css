@@ -1,0 +1,14 @@
+ul{
+  list-style: none;
+}
+li{
+  list-style: none;
+}
+.sameLine{
+  display:inline-block
+}
+.setBoxSize{
+  height:50px;
+  width:375px;
+  /* word-break: break-word; */
+}

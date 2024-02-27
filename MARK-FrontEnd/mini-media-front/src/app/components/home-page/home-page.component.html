@@ -1,0 +1,160 @@
+<app-tabs></app-tabs>
+
+<div class="setMargin">
+  <div class="card card border-primary" class="setSize">
+    <div class="card-body">
+      <h6 class="card-title" style="color: #2d16e5">
+        <i class="bi bi-person" style="color: black"></i>
+        {{ showuserName }}
+      </h6>
+      <!-- <p class=""> -->
+      <div class="card-text row">
+        <div class="col">
+          <img src="{{ profilePicture }}" class="setprofileimage" />
+        </div>
+        <div class="col setmargintop">
+          <span class="mt-2 font-weight-bold" style="color: #2d16e5"
+            >Create Post
+          </span>
+          <br />
+          <label class="custom-file-upload mt-2">
+            <input
+              type="file"
+              (change)="onUploadFileSelect($event)"
+              value="Select image"
+            />
+          </label>
+          <input
+            type="text"
+            class="setBoxSize mt-2 mb-2"
+            name=""
+            id=""
+            placeholder="Please enter caption.."
+            [(ngModel)]="uploadImageCaption"
+            #ngModel
+          />
+          <input
+            type="button"
+            value="Post"
+            class="btn btn-primary mt-2"
+            (click)="uploadPost()"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="card card border-primary"
+    class="setSize"
+    *ngFor="let data of allImages"
+  >
+    <div class="card-body">
+      <h6 class="card-title" style="color: #2d16e5">
+        &nbsp;<i class="bi bi-person" style="color: black"></i>
+        {{ data.username }}
+      </h6>
+      <p class="card-text">
+        <angular-emojis [name]="'notebook'" size="20"> </angular-emojis>
+        {{ data.caption }}
+      </p>
+      <p class="card-text">
+        <small class="text-muted">
+          <angular-emojis [name]="'date'" size="20"> </angular-emojis
+          >{{ data.pictureuploadeddate }}  , {{data.pictureuploadedtime}}</small
+        >
+      </p>
+    </div>
+    <img
+      src="{{ data.url }}"
+      class="card-img-bottom setImagesize"
+      alt="Please wait..."
+    />
+    <div class="card">
+      <div class="card-body">
+        <button
+          type="button"
+          class="btn btn-primary setButtonSize"
+          (click)="showComments($event, data)"
+        >
+          Comments <i class="bi bi-chat"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#c5c4d2"
+  type="ball-scale-ripple"
+  [fullScreen]="true"
+  ><p style="color: white"></p
+></ngx-spinner>
+
+<div
+  class="modal fade bd-example-modal-lg"
+  id="commentsModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myLargeModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p
+          class="modal-title"
+          id="exampleModalLongTitle"
+          style="color: #2d16e5"
+        >
+          Comments
+          <angular-emojis [name]="'collision'" size="20"> </angular-emojis>
+        </p>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div *ngFor="let comm of comments" class="mt-2">
+          <i class="bi bi-person"></i>
+          <p class="sameLine" style="color: #2d16e5;margin-left: 1%;">{{ comm.username }}</p> &nbsp;
+          <p class="sameLine" style="color: grey;">{{comm.dateCommented}}, {{comm.timeCommented}}</p>
+      
+          <div class="float-right" *ngIf="comm.show === 'yes'">
+            <button
+              type="button"
+              class="setButtonDis"
+              (click)="deleteCommentClick($event, comm)"
+            >
+              <i class="bi bi-trash3" style="color: red"></i>
+            </button>
+          </div><br>
+
+          <i class="bi bi-chat"></i>
+          <p style="margin-left: 1%; color: black;" class="sameLine" >{{ comm.comment }}</p> 
+        </div>
+      </div>
+      <div class="modal-footer">
+        <i class="bi bi-chat" style="color: #2d16e5"></i> &nbsp; Add a
+        comment... &nbsp;
+
+        <input
+          type="text"
+          class="mr-auto setinputsize setBr"
+          name="comment"
+          id="comm"
+          [(ngModel)]="commentVal"
+          #ngModel
+        />
+        <button type="button" class="setButtonDis" (click)="addComment($event)">
+          <i class="bi bi-plus-circle" style="color: green"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

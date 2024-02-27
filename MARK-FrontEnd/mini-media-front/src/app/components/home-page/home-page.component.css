@@ -1,0 +1,85 @@
+.setSize{
+    width: 70%;
+}
+.setMargin{
+    margin-left: 23%;
+}
+.sett{
+    width: 35%;
+    height: 300px;
+}
+.setinputsize{
+    width: 60%;
+}
+.sb{
+    height: 50%;
+}
+.setUp{
+    margin-top:-200px
+}
+.setBr{
+    border-radius: 100px;
+    border-color:#2d16e5 ;
+}
+.setSizeImage{
+    height: 400px;
+    width: 100%;
+}
+.setSize{
+    width: 70%;
+    box-shadow: 0 5px 20px rgba(0,0,0,.1);
+    margin-bottom: 10px;
+}
+.setMargin{
+    margin-left: 23%;
+}
+.setImagesize{
+    height: 550px;
+    width: 80%;
+    margin-left: 10%;
+}
+
+.setButtonSize{
+    float: right;
+}
+.sameLine{
+    display:inline-block
+  }
+.setButtonDis{
+    background: none;
+    border: none;
+}
+.emojiButton{
+    background: none;
+    border: none;
+}
+.modal-body{
+    word-break: break-all;
+  }
+
+.emojiButton:hover{
+    transform: scale(1.5); 
+    /* -webkit-transition: transform 2s ease-in-out;
+    -moz-transition:transform 2s ease-in-out;
+    -ms-transition:transform 2s ease-in-out; */
+}
+/* input[type="file"] {
+    display: none;
+} */
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+.setprofileimage{
+    width: 100% !important;
+}
+.setmargintop{
+    margin-top:5% !important
+}
+.setBoxSize{
+    height:50px;
+    width:375px;
+    /* word-break: break-word; */
+}

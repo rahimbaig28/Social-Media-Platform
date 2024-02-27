@@ -1,0 +1,316 @@
+<app-tabs></app-tabs>
+<!-- cover photo -->
+<div class="setSizeImage">
+  <img
+    src="{{ coverPicture }}"
+    style="width: 100%; height: 550px"
+    alt="No cover photo found"
+  />
+  <!-- <span class=""></span> -->
+  <button
+    type="button"
+    value="Upload Cover Photo"
+    title="Upload cover picture"
+    class="setButtonDis float-right text-left"
+    (click)="coverUploadClick($event)"
+  >
+    <i class="bi bi-plus-circle" style="color: green; font-size: 30px"></i>
+  </button>
+</div>
+
+<!-- profile photo -->
+<div class="row setUp">
+  <div class="col-4"></div>
+  <div class="col">
+    <div>
+      <div class="card mb-3">
+        <img src="{{ profilePicture }}" class="card-img-top" />
+        <div class="card-body shadow rounded">
+          <h5 class="card-title" style="color: #2d16e5">
+            Hi There, {{ showuserName }}
+          </h5>
+          <p class="card-text">
+            <angular-emojis [name]="'email'" size="20"> </angular-emojis
+            >{{ showEmail }}
+          </p>
+          <p class="card-text">
+            <small class="text-muted"
+              >Last updated on {{ profileUploadedDate }}  ,{{profileUploadedTime}}</small
+            >
+            <button
+              type="button"
+              title="Upload profile picture"
+              class="setButtonDis float-right"
+              (click)="profileUploadClick($event)"
+            >
+              <i
+                class="bi bi-plus-circle"
+                style="color: green; font-size: 30px"
+              ></i>
+            </button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4"></div>
+</div>
+
+<!-- all uploaded images -->
+<div class="setMargin">
+  <div
+    class="card card border-primary"
+    class="setSize"
+    *ngFor="let data of allImages"
+  >
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <h6 class="card-title" style="color: #2d16e5">
+            &nbsp;<i class="bi bi-person" style="color: black"></i>
+            {{ showuserName }}
+          </h6>
+        </div>
+        <div class="col">
+          <div class="col"></div>
+          <div class="col" style="margin-left: 300px">
+            <button
+              type="button"
+              class="setButtonDis"
+              title="Delete Image"
+              (click)="deleteImage($event,data)"
+            >
+              <i class="bi bi-trash3" style="color: red"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <p class="card-text">
+        <angular-emojis [name]="'notebook'" size="20"> </angular-emojis>
+        {{ data.caption }}
+      </p>
+      <p class="card-text">
+        <small class="text-muted">
+          <angular-emojis [name]="'date'" size="20"> </angular-emojis
+          >{{ data.pictureuploadeddate }} , {{data.pictureuploadedtime}}</small
+        >
+      </p>
+    </div>
+    <img src="{{ data.url }}" class="card-img-bottom setImagesize" />
+    <div class="card">
+      <div class="card-body">
+        <button
+          type="button"
+          class="btn btn-primary setButtonSize"
+          (click)="showComments($event, data)"
+        >
+          Comments <i class="bi bi-chat"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#c5c4d2"
+  type="ball-scale-ripple"
+  [fullScreen]="true"
+  ><p style="color: white"></p
+></ngx-spinner>
+
+<!-- comments modal -->
+<div
+  class="modal fade bd-example-modal-lg"
+  id="commentsModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myLargeModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p
+          class="modal-title"
+          id="exampleModalLongTitle"
+          style="color: #2d16e5"
+        >
+          Comments
+          <angular-emojis [name]="'collision'" size="20"> </angular-emojis>
+        </p>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- <div class="modal-body">
+        <div *ngFor="let comm of comments" class="mt-2">
+          <i class="bi bi-person"></i>
+          <p class="sameLine" style="color: #2d16e5">{{ comm.username }}</p>
+          &nbsp;
+          <div class="sameLine commentSize">{{ comm.comment }}</div>
+          <div class="float-right">
+            <button
+              type="button"
+              class="setButtonDis"
+              (click)="deleteCommentClick($event, comm)"
+            >
+              <i class="bi bi-trash3" style="color: red"></i>
+            </button>
+          </div>
+        </div>
+      </div> -->
+      <div class="modal-body">
+        <div *ngFor="let comm of comments" class="mt-2">
+          <i class="bi bi-person"></i>
+          <p class="sameLine" style="color: #2d16e5;margin-left: 1%;">{{ comm.username }}</p> &nbsp;
+          <p class="sameLine" style="color: grey;">{{comm.dateCommented}}, {{comm.timeCommented}}</p>
+      
+          <div class="float-right">
+            <button
+              type="button"
+              class="setButtonDis"
+              (click)="deleteCommentClick($event, comm)"
+            >
+              <i class="bi bi-trash3" style="color: red"></i>
+            </button>
+          </div><br>
+          <i class="bi bi-chat"></i>
+          <p style="margin-left: 1%; color: black;" class="sameLine" >{{ comm.comment }}</p> 
+        </div>
+      </div>
+      <div class="modal-footer">
+        <i class="bi bi-chat" style="color: #2d16e5"></i> &nbsp; Add a
+        comment... &nbsp;
+
+        <input
+          type="text"
+          class="mr-auto setinputsize setBr"
+          name="comment"
+          id="comm"
+          [(ngModel)]="commentVal"
+          #ngModel
+        />
+        <button type="button" class="setButtonDis" (click)="addComment($event)">
+          <i class="bi bi-plus-circle" style="color: green"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- upload profile modal -->
+<div
+  class="modal fade bd-example-modal-lg"
+  id="profileupload"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myLargeModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="setmargintop" style="display: initial">
+          <span class="mt-2 font-weight-bold" style="color: #2d16e5"
+            >Upload new profile photo
+          </span>
+          <br />
+          <label class="custom-file-upload mt-2">
+            <input
+              type="file"
+              (change)="onUploadFileSelect($event)"
+              value="Select image"
+            /> </label
+          ><br />
+          <input
+            type="text"
+            class="setBoxSize mt-2 mb-2"
+            name=""
+            id=""
+            placeholder="Please enter caption.."
+            [(ngModel)]="uploadImageCaption"
+            #ngModel
+          /><br />
+          <input
+            type="button"
+            value="Upload"
+            class="btn btn-primary mt-2"
+            (click)="uploadPost()"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- upload new cover photo -->
+<div
+  class="modal fade bd-example-modal-lg"
+  id="coverupload"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myLargeModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="setmargintop" style="display: initial">
+          <span class="mt-2 font-weight-bold" style="color: #2d16e5"
+            >Upload new cover photo
+          </span>
+          <br />
+          <label class="custom-file-upload mt-2">
+            <input
+              type="file"
+              (change)="onUploadFileSelect2($event)"
+              value="Select image"
+            /> </label
+          ><br />
+          <input
+            type="text"
+            class="setBoxSize mt-2 mb-2"
+            name=""
+            id=""
+            placeholder="Please enter caption.."
+            [(ngModel)]="uploadImageCaption"
+            #ngModel
+          /><br />
+          <input
+            type="button"
+            value="Upload"
+            class="btn btn-primary mt-2"
+            (click)="uploadCover()"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
