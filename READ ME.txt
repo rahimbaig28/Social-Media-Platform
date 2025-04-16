@@ -56,4 +56,4 @@ Answer::
 ADD Allow cors extention:
 "https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf"
 
-if you have any more Questions please mail us at hoomark0321@gmail.com
+if you have any more Questions please mail us at rahimbaig00332211@gmail.com
